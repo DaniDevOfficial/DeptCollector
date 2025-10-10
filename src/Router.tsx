@@ -2,6 +2,7 @@ import {RouterProvider, createHashRouter} from "react-router-dom";
 import {DefaultLayout} from "./layouts/Default";
 import {HomePage} from "./pages/Home";
 import {Box, Flex, useColorModeValue} from "@chakra-ui/react";
+import {Login} from "./pages/Login.tsx";
 
 
 const router = createHashRouter([
@@ -12,7 +13,11 @@ const router = createHashRouter([
             {
                 index: true, // same path as parent: "/"
                 element: <HomePage/>,
-            }
+            },
+            {
+                element: <Login />,
+                path: 'login',
+            },
         ],
     },
 

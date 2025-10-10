@@ -54,7 +54,9 @@ export function Landing() {
                 >
                     <Button
                         as="a"
-                        href="https://play.google.com/store"
+                        onClick={() => {
+                            navigate('/login');
+                        }}
                         target="_blank"
                         rel="noopener noreferrer"
                         colorScheme="blue"
