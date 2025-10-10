@@ -23,7 +23,7 @@ export function Login() {
 
 
     async function submitForm() {
-
+        navigate("/dashboard");
         if (password === "" || username === "") {
             toast({
                 status: 'warning',
@@ -97,7 +97,7 @@ export function Login() {
                             fontWeight="bold"
                             color={colorMode === "light" ? "blue.600" : "blue.300"}
                         >
-                            Join New Group
+                            Log into account
                         </Text>
                     </Heading>
                     <FormControl>

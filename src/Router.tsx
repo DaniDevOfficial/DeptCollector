@@ -3,6 +3,7 @@ import {DefaultLayout} from "./layouts/Default";
 import {HomePage} from "./pages/Home";
 import {Box, Flex, useColorModeValue} from "@chakra-ui/react";
 import {Login} from "./pages/Login.tsx";
+import {Dashboard} from "./pages/Dashboard.tsx";
 
 
 const router = createHashRouter([
@@ -17,6 +18,10 @@ const router = createHashRouter([
             {
                 element: <Login />,
                 path: 'login',
+            },
+            {
+                element: <Dashboard />,
+                path: 'dashboard',
             },
         ],
     },
