@@ -10,7 +10,7 @@ export function DefaultLayout() {
         <chakra.div width={"100%"}>
             <chakra.div minHeight={"100vh"} width={"100%"}>
                 <chakra.main marginBottom={"2rem"}>
-                    <Container maxW={"5xl"}>
+                    <Container maxW={"5xl"}  width={'100vw'} >
                         <Outlet/>
                     </Container>
                 </chakra.main>

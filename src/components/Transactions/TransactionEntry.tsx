@@ -5,8 +5,11 @@ import {
     Text,
     useColorModeValue,
     Badge,
-    Spacer, Avatar, HStack,
+    Spacer, Avatar, HStack, Button, VStack,
 } from "@chakra-ui/react";
+import {PillTag} from "../ui/PillTag.tsx";
+
+export type TransactionStatus = "pending" | "approved";
 
 export interface SkipTransaction {
     id: string;
@@ -16,12 +19,16 @@ export interface SkipTransaction {
     reason: string;
     date: Date;
     debtValue: number;
+    status: TransactionStatus;
+    createdBy: string;
+    approvedBy?: string;
 }
 
 export function TransactionEntry({ transaction }: { transaction: SkipTransaction }) {
     const bg = useColorModeValue("gray.100", "gray.700");
     const textColor = useColorModeValue("gray.800", "gray.100");
     const secondaryText = useColorModeValue("gray.500", "gray.400");
+    const isPending = transaction.status === "pending";
 
     return (
         <Box
@@ -56,7 +63,11 @@ export function TransactionEntry({ transaction }: { transaction: SkipTransaction
 
                 <Spacer />
 
-                <Box textAlign="right">
+                <VStack
+                    justifyContent="space-between"
+                    alignItems="flex-end"
+                >
+                    <PillTag content={transaction.status} colorScheme={isPending ? "yellow" : "green"} />
                     <Badge
                         colorScheme="blue"
                         fontSize="0.9em"
@@ -69,8 +80,9 @@ export function TransactionEntry({ transaction }: { transaction: SkipTransaction
                     <Text fontSize="xs" color={secondaryText}>
                         {transaction.date.toLocaleDateString()} : {transaction.date.toLocaleTimeString()}
                     </Text>
-                </Box>
+                </VStack>
             </Flex>
+
         </Box>
     );
 }
