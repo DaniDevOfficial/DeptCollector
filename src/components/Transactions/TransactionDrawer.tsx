@@ -9,6 +9,7 @@ import {
     Text
 } from "@chakra-ui/react";
 import {SkipTransaction} from "./TransactionEntry.tsx";
+import {PillTag} from "../ui/PillTag.tsx";
 
 export function TransactionDrawer({isOpen, onClose, transaction}: {
     isOpen: boolean,
@@ -16,7 +17,7 @@ export function TransactionDrawer({isOpen, onClose, transaction}: {
     transaction: SkipTransaction
 }) {
 
-
+    const isPending = transaction.status === "pending";
     return (
         <>
             <Drawer placement="right" isOpen={isOpen} onClose={onClose} size={'md'}>
@@ -31,13 +32,20 @@ export function TransactionDrawer({isOpen, onClose, transaction}: {
                                     justifyContent="space-between"
                                     flexDir={'row'}
                                 >
-
+                                    {transaction.title}
+                                    <div>
+                                        {transaction.status && (
+                                            <PillTag
+                                                content={transaction.status}
+                                                colorScheme={isPending ? "yellow" : "green"}
+                                            />
+                                        )}
+                                    </div>
                                 </Flex>
-
-                                <Text fontSize={'xs'} color={'gray.500'}>
-                                    {transaction.id ?? ''}
-                                </Text>
                             </DrawerHeader>
+                            <Text color={'gray.500'}>
+                                {transaction.reason}
+                            </Text>
 
 
                         </Flex>
