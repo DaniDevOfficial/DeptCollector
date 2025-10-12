@@ -14,7 +14,7 @@ export async function getUsers() {
             id: 'asdfasdf',
             name: 'asdfasdf',
         }
-    ]
+    ];
 
     return data;
 }

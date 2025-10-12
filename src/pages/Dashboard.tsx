@@ -40,7 +40,7 @@ export function Dashboard() {
             reason: "Znacht isch wichtiger gsi 🍝",
             date: new Date(),
             debtValue: 7.5,
-            status: 'pending',
+            status: 'pending_approval',
             createdBy: 'David'
         },
     ];

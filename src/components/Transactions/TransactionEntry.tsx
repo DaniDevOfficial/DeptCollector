@@ -2,8 +2,9 @@ import {Avatar, Badge, Box, Flex, HStack, Spacer, Text, useColorModeValue, VStac
 import {PillTag} from "../ui/PillTag.tsx";
 import {TransactionDrawer} from "./TransactionDrawer.tsx";
 import {useDisclosure} from "@chakra-ui/icons";
+import {getTransactionStatusText, getTransactionStatusColor} from "../../utility/Language/Translations.ts";
 
-export type TransactionStatus = "pending" | "approved";
+export type TransactionStatus = "pending_approval" | "approved" | "pending_delete";
 
 export interface SkipTransaction {
     id: string;
@@ -22,12 +23,13 @@ export function TransactionEntry({transaction}: { transaction: SkipTransaction }
     const bg = useColorModeValue("gray.100", "gray.700");
     const textColor = useColorModeValue("gray.800", "gray.100");
     const secondaryText = useColorModeValue("gray.500", "gray.400");
-    const isPending = transaction.status === "pending";
+    const isPending = transaction.status === "pending_approval";
     const {isOpen, onOpen, onClose} = useDisclosure();
 
     return (
         <>
             <Box
+                cursor="pointer"
                 onClick={onOpen}
                 bg={bg}
                 borderRadius="xl"
@@ -64,7 +66,7 @@ export function TransactionEntry({transaction}: { transaction: SkipTransaction }
                         justifyContent="space-between"
                         alignItems="flex-end"
                     >
-                        <PillTag content={transaction.status} colorScheme={isPending ? "yellow" : "green"}/>
+                        <PillTag content={getTransactionStatusText(transaction.status)} colorScheme={getTransactionStatusColor(transaction.status)} />
                         <Badge
                             colorScheme="blue"
                             fontSize="0.9em"
