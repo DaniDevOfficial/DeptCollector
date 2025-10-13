@@ -12,9 +12,10 @@ import {
     Box,
     useToast
 } from "@chakra-ui/react";
-import {SkipTransaction} from "./TransactionEntry.tsx";
 import {PillTag} from "../ui/PillTag.tsx";
 import {getTransactionStatusColor, getTransactionStatusText} from "../../utility/Language/Translations.ts";
+import {SkipTransaction} from "../../Repo/GenericTypes/Transactions/transaction.ts";
+import {ApprovalSection} from "./ApprovalSection.tsx";
 
 export function TransactionDrawer({
                                       isOpen,
@@ -25,30 +26,6 @@ export function TransactionDrawer({
     onClose: () => void;
     transaction: SkipTransaction;
 }) {
-    const toast = useToast();
-
-    async function handleApprove() {
-        //TODO: add backend call
-        toast({
-            title: "Transaction approved",
-            status: "success",
-            duration: 3000,
-            isClosable: true
-        });
-        onClose();
-    }
-
-    async function handleDelete() {
-        //TODO: add backend call
-
-        toast({
-            title: "Transaction deleted 🗑️",
-            status: "info",
-            duration: 3000,
-            isClosable: true
-        });
-        onClose();
-    }
 
     return (
         <Drawer placement="right" isOpen={isOpen} onClose={onClose} size="md">
@@ -113,21 +90,15 @@ export function TransactionDrawer({
                             <Text fontSize="sm" color="gray.500">
                                 Created by
                             </Text>
-                            <Text>{transaction.createdBy}</Text>
+                            <Text>{transaction.createdByName}</Text>
                         </Box>
 
-                        {transaction.approvedBy && (
-                            <Box>
-                                <Text fontSize="sm" color="gray.500">
-                                    Approved by
-                                </Text>
-                                <Text>{transaction.approvedBy}</Text>
-                            </Box>
-                        )}
                     </Flex>
 
-                    <Flex mt={8} justify="flex-end" gap={3}>
-                    </Flex>
+                    <ApprovalSection
+                        transaction={transaction}
+                        currentUser={{id: '123123', name: 'David'}}
+                    />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

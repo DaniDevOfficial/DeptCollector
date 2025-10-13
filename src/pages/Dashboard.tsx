@@ -14,9 +14,10 @@ import {
     StatNumber,
     SimpleGrid,
 } from "@chakra-ui/react";
-import {SkipTransaction, TransactionEntry} from "../components/Transactions/TransactionEntry.tsx";
+import {TransactionEntry} from "../components/Transactions/TransactionEntry.tsx";
 import {NewTransactionModal} from "../components/Transactions/NewTransactionModal.tsx";
 import {useDisclosure} from "@chakra-ui/icons";
+import {SkipTransaction} from "../Repo/GenericTypes/Transactions/transaction.ts";
 
 export function Dashboard() {
     const currUser = '123123';
@@ -30,7 +31,12 @@ export function Dashboard() {
             date: new Date(),
             debtValue: 5.0,
             status: 'approved',
-            createdBy: 'David'
+            createdByName: 'David',
+            createdById: '123123',
+            createdAt: "",
+            approvedBy: [],
+            deletedBy: [],
+            requiredApprovals: 2
         },
         {
             id: "2",
@@ -40,8 +46,45 @@ export function Dashboard() {
             reason: "Znacht isch wichtiger gsi 🍝",
             date: new Date(),
             debtValue: 7.5,
-            status: 'pending_approval',
-            createdBy: 'David'
+            status: 'pending',
+            createdByName: 'David',
+            createdById: '123123',
+            createdAt: "",
+            approvedBy: [{id: '123123', name: "asdf"}],
+            deletedBy: [{id: '123123', name: "asdf"}],
+            requiredApprovals: 2
+        },
+        {
+            id: "2",
+            userId: "888999",
+            userName: "Luca",
+            title: "Analysis Übung",
+            reason: "Znacht isch wichtiger gsi 🍝",
+            date: new Date(),
+            debtValue: 7.5,
+            status: 'delete_pending',
+            createdByName: 'David',
+            createdById: '123123',
+            createdAt: "",
+            approvedBy: [],
+            deletedBy: [],
+            requiredApprovals: 2
+        },
+        {
+            id: "2",
+            userId: "888999",
+            userName: "Luca",
+            title: "Analysis Übung",
+            reason: "Znacht isch wichtiger gsi 🍝",
+            date: new Date(),
+            debtValue: 7.5,
+            status: 'delete_pending',
+            createdByName: 'David',
+            createdById: '123123',
+            createdAt: "",
+            approvedBy: [],
+            deletedBy: [],
+            requiredApprovals: 2
         },
     ];
 
