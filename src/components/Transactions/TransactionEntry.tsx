@@ -21,6 +21,7 @@ export function TransactionEntry({transaction}: { transaction: SkipTransaction }
                 p={4}
                 shadow="md"
                 transition="all 0.2s ease"
+                w={'90%'}
                 _hover={{transform: "scale(1.01)", shadow: "lg"}}
             >
                 <Flex alignItems="center">

@@ -23,7 +23,7 @@ export function Login() {
 
 
     async function submitForm() {
-        navigate("/dashboard");
+        navigate("/p/dashboard");
         if (password === "" || username === "") {
             toast({
                 status: 'warning',

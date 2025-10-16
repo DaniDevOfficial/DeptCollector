@@ -18,75 +18,26 @@ import {TransactionEntry} from "../components/Transactions/TransactionEntry.tsx"
 import {NewTransactionModal} from "../components/Transactions/NewTransactionModal.tsx";
 import {useDisclosure} from "@chakra-ui/icons";
 import {SkipTransaction} from "../Repo/GenericTypes/Transactions/transaction.ts";
+import {useEffect, useState} from "react";
+import {loadTransactions} from "../Repo/transactions/loadTransactions/loadTransactionHandler.ts";
 
 export function Dashboard() {
     const currUser = '123123';
-    const transactions: SkipTransaction[] = [
-        {
-            id: "1",
-            userId: "123123",
-            userName: "David",
-            title: "Diskrete Mathe 2 Lektione",
-            reason: "Absoult kei bock meh gha",
-            date: new Date(),
-            debtValue: 5.0,
-            status: 'approved',
-            createdByName: 'David',
-            createdById: '123123',
-            createdAt: "",
-            approvedBy: [],
-            deletedBy: [],
-            requiredApprovals: 2
-        },
-        {
-            id: "2",
-            userId: "888999",
-            userName: "Luca",
-            title: "Analysis Übung",
-            reason: "Znacht isch wichtiger gsi 🍝",
-            date: new Date(),
-            debtValue: 7.5,
-            status: 'pending',
-            createdByName: 'David',
-            createdById: '123123',
-            createdAt: "",
-            approvedBy: [{id: '123123', name: "asdf"}],
-            deletedBy: [{id: '123123', name: "asdf"}],
-            requiredApprovals: 2
-        },
-        {
-            id: "2",
-            userId: "888999",
-            userName: "Luca",
-            title: "Analysis Übung",
-            reason: "Znacht isch wichtiger gsi 🍝",
-            date: new Date(),
-            debtValue: 7.5,
-            status: 'delete_pending',
-            createdByName: 'David',
-            createdById: '123123',
-            createdAt: "",
-            approvedBy: [],
-            deletedBy: [],
-            requiredApprovals: 2
-        },
-        {
-            id: "2",
-            userId: "888999",
-            userName: "Luca",
-            title: "Analysis Übung",
-            reason: "Znacht isch wichtiger gsi 🍝",
-            date: new Date(),
-            debtValue: 7.5,
-            status: 'delete_pending',
-            createdByName: 'David',
-            createdById: '123123',
-            createdAt: "",
-            approvedBy: [],
-            deletedBy: [],
-            requiredApprovals: 2
-        },
-    ];
+
+    const [transactions, setTransactions] = useState<SkipTransaction[]>([]);
+
+    async function fetchTransactions() {
+        try {
+            const data = await loadTransactions();
+            setTransactions(data);
+        } catch (error) {
+            console.error(error); //TODO: add error handling
+        }
+    }
+
+    useEffect(() => {
+        fetchTransactions();
+    }, []);
 
     const totalDebt = transactions.reduce((sum, t) => sum + t.debtValue, 0); //TODO: This will be computed by the backend
     const personalDebt = transactions.reduce((sum, t) => sum + (t.userId === currUser ? t.debtValue : 0), 0); //TODO: This will be computed by the backend
@@ -95,7 +46,7 @@ export function Dashboard() {
     const {isOpen, onOpen, onClose} = useDisclosure();
     return (
         <>
-            <Box bg={bg} pt={10} px={{base: 4, md: 10}} maxW={'90vw'}>
+            <Box bg={bg} pt={10} px={{base: 4, md: 10}} maxW={'90vw'} justifyContent={'center'} py={10}>
                 <Flex alignItems="center" mb={8} flexDir={{base: 'column', md: 'row'}}>
                     <Heading textAlign={'center'} size="lg" color={useColorModeValue("blue.600", "blue.300")}>
                         Welcome Back {'Username'} 👋
@@ -129,7 +80,7 @@ export function Dashboard() {
 
                 <Divider mb={6}/>
 
-                <VStack spacing={4} align="stretch">
+                <VStack spacing={4} align="stretch" alignItems={'center'}>
                     <Heading as="h2" size="md" color={useColorModeValue("gray.700", "gray.200")}>
                         Recent Skips
                     </Heading>
