@@ -8,7 +8,7 @@ import {
     Select, useColorModeValue,
 } from '@chakra-ui/react'
 import { useState } from 'react'
-import {ArrowUpIcon, SearchIcon} from "@chakra-ui/icons";
+import {ArrowDownIcon, ArrowUpIcon, SearchIcon} from "@chakra-ui/icons";
 
 export function FilterSection() {
     const [orderAsc, setOrderAsc] = useState(true)
@@ -49,9 +49,11 @@ export function FilterSection() {
                 variant='ghost'
                 title={orderAsc ? 'Ascending' : 'Descending'}
                 _hover={{ bg: 'whiteAlpha.200' }}
+                transition='transform 0.3s ease-in-out'
+                transform={orderAsc ? 'rotate(0deg)' : 'rotate(180deg)'}
             />
 
-            <Select placeholder='Sort by' width='180px'>
+            <Select placeholder='Status' width='180px'>
                 <option value={'all'}>All</option>
                 <option value={'approved'}>Approved</option>
                 <option value='requestApproval'>Request new</option>

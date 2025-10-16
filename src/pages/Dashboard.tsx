@@ -20,19 +20,24 @@ import {useDisclosure} from "@chakra-ui/icons";
 import {SkipTransaction} from "../Repo/GenericTypes/Transactions/transaction.ts";
 import {useEffect, useState} from "react";
 import {loadTransactions} from "../Repo/transactions/loadTransactions/loadTransactionHandler.ts";
+import {TransactionList} from "../components/Transactions/TransactionList.tsx";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 export function Dashboard() {
     const currUser = '123123';
-
+    const [loading, setLoading] = useState(false);
     const [transactions, setTransactions] = useState<SkipTransaction[]>([]);
 
     async function fetchTransactions() {
+        setLoading(true);
         try {
             const data = await loadTransactions();
             setTransactions(data);
         } catch (error) {
             console.error(error); //TODO: add error handling
         }
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -84,16 +89,7 @@ export function Dashboard() {
                     <Heading as="h2" size="md" color={useColorModeValue("gray.700", "gray.200")}>
                         Recent Skips
                     </Heading>
-                    {transactions.map((transaction: SkipTransaction) => (
-                        <TransactionEntry transaction={transaction} key={transaction.id}/>
-                    ))}
-
-                    {transactions.length === 0 && (
-                        <Text color="gray.500" textAlign="center" py={10}>
-                            No Skipping recorded yet. Either you haven't started tracking or yall are actually locked in
-                            🔥🔥🔥
-                        </Text>
-                    )}
+                    <TransactionList transactions={transactions} isLoading={loading}/>
                 </VStack>
             </Box>
             <NewTransactionModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
