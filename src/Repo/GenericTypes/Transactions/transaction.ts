@@ -1,10 +1,5 @@
 import {User} from "../../user.ts";
 
-export type TransactionStatus =
-    | "pending"
-    | "approved"
-    | "delete_pending";
-
 export interface SkipTransaction {
     id: string;
     userId: string;
@@ -14,8 +9,6 @@ export interface SkipTransaction {
     reason: string;
     date: Date;
     debtValue: number;
-
-    status: TransactionStatus;
 
     createdByName: string;
     createdById: string;

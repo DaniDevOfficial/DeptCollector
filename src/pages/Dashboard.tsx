@@ -85,7 +85,7 @@ export function Dashboard() {
 
                 <Divider mb={6}/>
 
-                <VStack spacing={4} align="stretch" alignItems={'center'}>
+                <VStack spacing={4} align="stretch" alignItems={'center'} maxH={'30vh'}>
                     <Heading as="h2" size="md" color={useColorModeValue("gray.700", "gray.200")}>
                         Recent Skips
                     </Heading>

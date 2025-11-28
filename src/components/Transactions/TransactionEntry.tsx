@@ -1,8 +1,6 @@
 import {Avatar, Badge, Box, Flex, HStack, Spacer, Text, useColorModeValue, VStack,} from "@chakra-ui/react";
-import {PillTag} from "../ui/PillTag.tsx";
 import {TransactionDrawer} from "./TransactionDrawer.tsx";
 import {useDisclosure} from "@chakra-ui/icons";
-import {getTransactionStatusColor, getTransactionStatusText} from "../../utility/Language/Translations.ts";
 import {SkipTransaction} from "../../Repo/GenericTypes/Transactions/transaction.ts";
 
 export function TransactionEntry({transaction}: { transaction: SkipTransaction }) {
@@ -52,7 +50,6 @@ export function TransactionEntry({transaction}: { transaction: SkipTransaction }
                         justifyContent="space-between"
                         alignItems="flex-end"
                     >
-                        <PillTag content={getTransactionStatusText(transaction.status)} colorScheme={getTransactionStatusColor(transaction.status)} />
                         <Badge
                             colorScheme="blue"
                             fontSize="0.9em"

@@ -63,6 +63,8 @@ export function NewTransactionModal({
             alert('error creating transaction');
         }
     }
+
+
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

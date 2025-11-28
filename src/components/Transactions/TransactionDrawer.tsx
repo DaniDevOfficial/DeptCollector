@@ -7,15 +7,10 @@ import {
     DrawerOverlay,
     Flex,
     Text,
-    Button,
     Divider,
     Box,
-    useToast
 } from "@chakra-ui/react";
-import {PillTag} from "../ui/PillTag.tsx";
-import {getTransactionStatusColor, getTransactionStatusText} from "../../utility/Language/Translations.ts";
 import {SkipTransaction} from "../../Repo/GenericTypes/Transactions/transaction.ts";
-import {ApprovalSection} from "./ApprovalSection.tsx";
 
 export function TransactionDrawer({
                                       isOpen,
@@ -37,12 +32,6 @@ export function TransactionDrawer({
                         <Text fontSize="xl" fontWeight="bold">
                             {transaction.title}
                         </Text>
-                        {transaction.status && (
-                            <PillTag
-                                content={getTransactionStatusText(transaction.status)}
-                                colorScheme={getTransactionStatusColor(transaction.status)}
-                            />
-                        )}
                     </Flex>
                 </DrawerHeader>
 
@@ -94,11 +83,6 @@ export function TransactionDrawer({
                         </Box>
 
                     </Flex>
-
-                    <ApprovalSection
-                        transaction={transaction}
-                        currentUser={{id: '123123', name: 'David'}}
-                    />
                 </DrawerBody>
             </DrawerContent>
         </Drawer>

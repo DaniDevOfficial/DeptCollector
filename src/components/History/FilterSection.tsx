@@ -5,10 +5,10 @@ import {
     InputGroup,
     InputLeftElement,
     IconButton,
-    Select, useColorModeValue,
+    useColorModeValue,
 } from '@chakra-ui/react'
-import { useState } from 'react'
-import {ArrowDownIcon, ArrowUpIcon, SearchIcon} from "@chakra-ui/icons";
+import {useState} from 'react'
+import {ArrowUpIcon, SearchIcon} from "@chakra-ui/icons";
 
 export function FilterSection() {
     const [orderAsc, setOrderAsc] = useState(true)
@@ -32,33 +32,26 @@ export function FilterSection() {
             <Box flex='1'>
                 <InputGroup>
                     <InputLeftElement pointerEvents='none'>
-                        <SearchIcon color='gray' />
+                        <SearchIcon color='gray'/>
                     </InputLeftElement>
                     <Input
                         placeholder='Search...'
                         variant='filled'
-                        _focus={{ bg: 'whiteAlpha.100' }}
+                        _focus={{bg: 'whiteAlpha.100'}}
                     />
                 </InputGroup>
             </Box>
 
             <IconButton
                 aria-label='Toggle order'
-                icon={<ArrowUpIcon />}
+                icon={<ArrowUpIcon/>}
                 onClick={toggleOrder}
                 variant='ghost'
                 title={orderAsc ? 'Ascending' : 'Descending'}
-                _hover={{ bg: 'whiteAlpha.200' }}
+                _hover={{bg: 'whiteAlpha.200'}}
                 transition='transform 0.3s ease-in-out'
                 transform={orderAsc ? 'rotate(0deg)' : 'rotate(180deg)'}
             />
-
-            <Select placeholder='Status' width='180px'>
-                <option value={'all'}>All</option>
-                <option value={'approved'}>Approved</option>
-                <option value='requestApproval'>Request new</option>
-                <option value='requestDeletion'>Deletion Requested</option>
-            </Select>
         </Flex>
     )
 }

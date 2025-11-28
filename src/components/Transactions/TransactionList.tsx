@@ -1,4 +1,4 @@
-import {HStack, Skeleton, SkeletonCircle, SkeletonText, Stack, Text, VStack} from "@chakra-ui/react";
+import { Skeleton, Text, VStack} from "@chakra-ui/react";
 import {SkipTransaction} from "../../Repo/GenericTypes/Transactions/transaction.ts";
 import {TransactionEntry} from "./TransactionEntry.tsx";
 
@@ -8,7 +8,7 @@ export function TransactionList({transactions, isLoading}: { transactions: SkipT
     if (isLoading) {
         return (
             <>
-                <VStack spacing={4} overflowY={'auto'} h={'80vh'} w={'100%'}>
+                <VStack spacing={4} overflowY={'auto'} h={'80vh'} w={'100%'} p={4}>
                     {[...Array(amountOfSkeletons)].map((_, i) => (
                         <Skeleton key={i} height='200px' width='90%' borderRadius='lg'/>
                     ))}
@@ -19,7 +19,7 @@ export function TransactionList({transactions, isLoading}: { transactions: SkipT
 
     return (
         <>
-            <VStack spacing={4} overflowY={'auto'} h={'80vh'} w={'100%'}>
+            <VStack spacing={4} overflowY={'auto'} h={'80vh'} w={'100%'} p={4}>
 
                 {transactions.map((transaction: SkipTransaction) => (
                     <TransactionEntry transaction={transaction} key={transaction.id}/>
@@ -27,8 +27,7 @@ export function TransactionList({transactions, isLoading}: { transactions: SkipT
 
                 {transactions.length === 0 && (
                     <Text color="gray.500" textAlign="center" py={10}>
-                        No Skipping recorded yet. Either you haven't started tracking or yall are actually locked in
-                        🔥🔥🔥
+                        No Skipping recorded yet. Either you haven't started tracking or yall are actually locked in 🔥🔥🔥
                     </Text>
                 )}
             </VStack>
